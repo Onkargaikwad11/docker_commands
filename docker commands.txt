@@ -24,7 +24,7 @@ subprocess.run(f'docker tag {local_container_name}:{image_tag} {ecr_registry_url
 subprocess.run(f'docker push {ecr_registry_url}/{local_container_name}:{image_tag}', shell=True)
 '''
 
-(note : this script should be present in that directory where your code are present
+(note : this script should be present in that directory where your code are present)
 
 
 
