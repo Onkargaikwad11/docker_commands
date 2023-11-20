@@ -28,7 +28,9 @@ subprocess.run(f'docker push {ecr_registry_url}/{local_container_name}:{image_ta
 
 
 
-4)above things are enough to upload docker image in ecr 
+4)then type (then run this line in termimnal '''python script.py'''
+
+above things are enough to upload docker image in ecr 
 
 5) docker file should be present while creating docker image 
 '''
