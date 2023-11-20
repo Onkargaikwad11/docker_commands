@@ -1,0 +1,47 @@
+docker commands
+
+
+local_container_name = "meetminutes-send-email-lambda"
+
+1) docker build -t {local_container_name} .      ****( building docker image)****
+
+2)aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 727----------------------------------ws.com          ****(for login ecr and docker *******(727---------------------------aws.com is ecr registry url)
+
+3) run below docker script in .py format 
+
+''' import subprocess
+
+# Define variables
+region = "ap-south-1"
+ecr_registry_url = "727----------------------aws.com"
+local_container_name = "meetminutes-send-email-lambda"
+image_tag = "latest"
+
+# Tag the local Docker image
+subprocess.run(f'docker tag {local_container_name}:{image_tag} {ecr_registry_url}/{local_container_name}:{image_tag}', shell=True)
+
+# Push the Docker image to ECR
+subprocess.run(f'docker push {ecr_registry_url}/{local_container_name}:{image_tag}', shell=True)
+'''
+
+(note : this script should be present in that directory where your code are present
+
+
+
+4)above things are enough to upload docker image in ecr 
+
+5) docker file should be present while creating docker image 
+'''
+
+FROM public.ecr.aws/lambda/python:3.9
+COPY . ${LAMBDA_TASK_ROOT}
+RUN pip install  --no-cache-dir -r requirements.txt
+CMD ["app.handler"]
+
+'''
+
+( note: 1) requirment.txt is what is required for your application to run 
+        2) handler is imported in fast api for deployment so import  (from mangum import Mangum) and in the last (handler = Mangum(app) ) 
+
+
+
